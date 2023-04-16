@@ -4,13 +4,13 @@ import mvc.*;
 import java.util.*;
 
 public class Simulation extends Model {
-    private Timer timer;
+    transient private Timer timer;
     private int clock;
     private List<Agent> agents;
 
     public Simulation() {
         clock = 0;
-        agents = new ArrayList<Agent>();
+        agents = new LinkedList<>();
     }
     private void startTimer() {
         timer = new Timer();
@@ -28,15 +28,48 @@ public class Simulation extends Model {
             changed();
         }
     }
-    public void start() {}
+    public void start() {
+        agents.clear();
+        clock = 0;
+        populate();
+        startTimer();
+        for (Agent a : agents) {
+            a.start();
+        }
+    }
 
-    public void suspend() {}
+    public void suspend() {
+        stopTimer();
+        for (Agent a : agents) {
+            a.suspend();
+        }
+    }
 
-    public void resume() {}
+    public void resume() {
+        startTimer();
+        for (Agent a : agents) {
+            a.resume();
+        }
+    }
 
-    public void stop() {}
+    public void stop() {
+        for (Agent a : agents) {
+            a.stop();
+        }
+        stopTimer();
+    }
 
     public Agent getNeighbor(Agent a, double radius) {
+        int index = Utilities.rng.nextInt(agents.size());
+        for (int i = 0; i < agents.size(); i++) {
+            if ((Math.abs(agents.get(index).getXc() - a.getXc()) <= radius) && Math.abs(agents.get(index).getYc() - a.getYc()) <= radius) {
+                return agents.get(index);
+            }
+            index++;
+            if (index >= agents.size()) {
+                index = 0;
+            }
+        }
         return null;
     }
 
@@ -45,5 +78,14 @@ public class Simulation extends Model {
     public void addAgent(Agent a) {
         agents.add(a);
         a.setWorld(this);
+    }
+
+    public Iterator<Agent> iterator() {
+        return agents.iterator();
+    }
+
+    public String[] getStats() {
+        String[] stats = {"#agents = " + agents.size(), "clock = " + clock};
+        return stats;
     }
 }
