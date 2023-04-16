@@ -34,10 +34,10 @@ public class PrisonerSimulation extends Simulation {
     public String[] getStats() {
         String[] stats = new String[4];
 
-        stats[0] = "avg fitness of Cooperate = " + getAverageFitness(new Cooperate());
-        stats[1] = "avg fitness of Randomly Cooperate = " + getAverageFitness(new RandomlyCooperate());
-        stats[2] = "avg fitness of Cheat = " + getAverageFitness(new Cheat());
-        stats[3] = "avg fitness of Tit4Tat = " + getAverageFitness(new Tit4Tat());
+        stats[0] = "avg fitness of Cooperate (GREEN) = " + getAverageFitness(new Cooperate());
+        stats[1] = "avg fitness of Randomly Cooperate (CYAN) = " + getAverageFitness(new RandomlyCooperate());
+        stats[2] = "avg fitness of Cheat (RED) = " + getAverageFitness(new Cheat());
+        stats[3] = "avg fitness of Tit4Tat (PINK) = " + getAverageFitness(new Tit4Tat());
 
         return stats;
     }

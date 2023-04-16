@@ -4,6 +4,8 @@ import mvc.Utilities;
 import simstation.Agent;
 import simstation.Heading;
 
+import java.awt.*;
+
 public class Prisoner extends Agent {
     private static int RADIUS_VALUE = 10;
     private Strategy strategy;
@@ -17,6 +19,7 @@ public class Prisoner extends Agent {
     }
 
     public void update() {
+        this.setColor(strategy.getStrategyColor());
         heading = Heading.random();
         int steps = Utilities.rng.nextInt(10) + 1;
         move(steps);
