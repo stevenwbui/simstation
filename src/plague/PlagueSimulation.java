@@ -13,7 +13,7 @@ public class PlagueSimulation extends Simulation {
     public static int VIRULENCE = 50; // % chance of infection
     public static int RESISTANCE = 2; // % chance of resisting infection
     public void populate() {
-        int starting_infected = Utilities.rng.nextInt(5) + 1; //TODO hard code idk whatever its called
+        int starting_infected = Utilities.rng.nextInt(5) + 1;
 
         for(int i = 0; i < starting_infected; i++)
             addAgent(new Host(true));

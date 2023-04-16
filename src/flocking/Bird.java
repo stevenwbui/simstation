@@ -9,7 +9,7 @@ public class Bird extends Agent {
     public Bird() {
         super("Flocking");
         heading = Heading.random();
-        speed = Utilities.rng.nextInt(5) + 1; //TODO hard code number 1-5
+        speed = Utilities.rng.nextInt(5) + 1;
     }
     @Override
     public void update() {
